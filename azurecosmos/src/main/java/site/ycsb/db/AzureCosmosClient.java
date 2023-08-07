@@ -260,19 +260,18 @@ public class AzureCosmosClient extends DB {
         builder.preferredRegions(preferredRegionList);
       }
 
-        // add openConnectionAndInitCaches call
-        CosmosContainerProactiveInitConfig proactiveContainerInitConfig =
-            new CosmosContainerProactiveInitConfigBuilder(
-                Arrays.asList(new CosmosContainerIdentity("ycsb", "usertable")))
-                .setProactiveConnectionRegionsCount(1)
-                .build();
-        builder.openConnectionsAndInitCaches(proactiveContainerInitConfig);
+      CosmosContainerProactiveInitConfig proactiveContainerInitConfig =
+          new CosmosContainerProactiveInitConfigBuilder(
+              Arrays.asList(new CosmosContainerIdentity("ycsb", "usertable")))
+              .setProactiveConnectionRegionsCount(1)
+                  .build();
 
-        // setup e2e timeout
-        builder
-            .endToEndOperationLatencyPolicyConfig(
-                new CosmosEndToEndOperationLatencyPolicyConfigBuilder(Duration.ofSeconds(2))
-                    .build());
+      builder.openConnectionsAndInitCaches(proactiveContainerInitConfig);
+
+      builder
+          .endToEndOperationLatencyPolicyConfig(
+              new CosmosEndToEndOperationLatencyPolicyConfigBuilder(Duration.ofSeconds(2))
+                  .build());
 
       AzureCosmosClient.client = builder.buildClient();
       LOGGER.info("Azure Cosmos DB connection created to {}", uri);
