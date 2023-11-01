@@ -264,7 +264,7 @@ public class AzureCosmosClient extends DB {
 
       CosmosContainerProactiveInitConfig proactiveContainerInitConfig =
           new CosmosContainerProactiveInitConfigBuilder(
-              Arrays.asList(new CosmosContainerIdentity("ycsb", "usertable")))
+              Arrays.asList(new CosmosContainerIdentity("testdb", "testcontainer")))
               .setProactiveConnectionRegionsCount(1)
               .build();
 
